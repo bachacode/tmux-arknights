@@ -4,11 +4,15 @@ current_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 get_option() {
   local option=$(tmux show-option -gqv "$1")
-  [ -z $option ] && echo $2 || echo $option
+  [ -z "$option" ] && echo "$2" || echo "$option"
 }
 
-set_option() {
-  tmux set-option -g "$1" "$2"
+set() {
+  tmux set-option -gq "$1" "$2"
+}
+
+setw() {
+  tmux set-window-option -gq "$1" "$2"
 }
 
 main() {
